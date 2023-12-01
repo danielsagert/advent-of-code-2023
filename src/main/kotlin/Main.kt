@@ -1,8 +1,9 @@
 import kotlin.system.measureTimeMillis
 
-const val TEST_MODE = true
+const val TEST_MODE = false
 
 fun main() {
+    println("Test mode: $TEST_MODE")
     val puzzle = Day01()
     execute(puzzle, 1)
     println("-----")

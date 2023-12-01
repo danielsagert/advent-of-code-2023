@@ -1,4 +1,16 @@
 class Day01 : Puzzle {
+    private val digitStringToInt = mapOf(
+        "one" to 1,
+        "two" to 2,
+        "three" to 3,
+        "four" to 4,
+        "five" to 5,
+        "six" to 6,
+        "seven" to 7,
+        "eight" to 8,
+        "nine" to 9
+    )
+
     override fun executePart1(input: String): String {
         return input.lineSequence()
             .filterNot(String::isNullOrEmpty)
@@ -10,6 +22,55 @@ class Day01 : Puzzle {
     }
 
     override fun executePart2(input: String): String {
-        return "Not yet implemented"
+        return input.lineSequence()
+            .filterNot(String::isNullOrEmpty)
+            .map { "" + firstDigit(it) + lastDigit(it) }
+            .map { it.toInt() }
+            .sum()
+            .toString()
+    }
+
+    private fun firstDigit(line: String): Int {
+        var remaining = line
+
+        while (remaining.isNotEmpty()) {
+            val first = remaining.first()
+
+            if (first.isDigit()) {
+                return first.digitToInt()
+            }
+
+            digitStringToInt.entries.forEach {
+                if (remaining.startsWith(it.key)) {
+                    return it.value
+                }
+            }
+
+            remaining = remaining.drop(1)
+        }
+
+        throw IllegalArgumentException("Line $line does not contain any digit")
+    }
+
+    private fun lastDigit(line: String): Int {
+        var remaining = line
+
+        while (remaining.isNotEmpty()) {
+            val last = remaining.last()
+
+            if (last.isDigit()) {
+                return last.digitToInt()
+            }
+
+            digitStringToInt.entries.forEach {
+                if (remaining.endsWith(it.key)) {
+                    return it.value
+                }
+            }
+
+            remaining = remaining.dropLast(1)
+        }
+
+        throw IllegalArgumentException("Line $line does not contain any digit")
     }
 }
