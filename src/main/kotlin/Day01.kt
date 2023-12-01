@@ -1,5 +1,5 @@
 class Day01 : Puzzle {
-    override fun resultPart1(input: String): String {
+    override fun executePart1(input: String): String {
         return input.lineSequence()
             .filterNot(String::isNullOrEmpty)
             .map { s -> s.filter { it.isDigit() } }
@@ -9,7 +9,7 @@ class Day01 : Puzzle {
             .toString()
     }
 
-    override fun resultPart2(input: String): String {
+    override fun executePart2(input: String): String {
         return "Not yet implemented"
     }
 }

@@ -1,14 +1,24 @@
 interface Puzzle {
-    fun resultPart1(input: String): String
-
-    fun resultPart2(input: String): String
-
-    fun input(): String {
-        return readResourceFile(javaClass.simpleName + ".txt")
+    fun execute(part: Int, input: String): String {
+        return when (part) {
+            1 -> executePart1(input)
+            2 -> executePart2(input)
+            else -> "Invalid part (1 or 2, but was $part)"
+        }
     }
 
-    fun testInput(): String {
-        return readResourceFile(javaClass.simpleName + "-test.txt")
+    fun executePart1(input: String): String
+
+    fun executePart2(input: String): String
+
+    fun input(part: Int): String {
+        val day = javaClass.simpleName.lowercase()
+        return readResourceFile("$day/$part.txt")
+    }
+
+    fun testInput(part: Int): String {
+        val day = javaClass.simpleName.lowercase()
+        return readResourceFile("$day/$part-test.txt")
     }
 
     private fun readResourceFile(filePath: String): String {

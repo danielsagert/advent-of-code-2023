@@ -1,20 +1,20 @@
 import kotlin.system.measureTimeMillis
 
-val puzzle = Day01()
-const val TEST_MODE = false
+const val TEST_MODE = true
 
 fun main() {
-    val input = if (TEST_MODE) puzzle.testInput() else puzzle.input()
-
-    val durationPart1 = measureTimeMillis {
-        println("Result part 1: ${puzzle.resultPart1(input)}")
-    }
-    println("Duration part 1: $durationPart1 ms")
-
+    val puzzle = Day01()
+    execute(puzzle, 1)
     println("-----")
+    execute(puzzle, 2)
+}
 
-    val durationPart2 = measureTimeMillis {
-        println("Result part 2: ${puzzle.resultPart2(input)}")
+private fun execute(puzzle: Puzzle, part: Int) {
+    val input = if (TEST_MODE) puzzle.testInput(part) else puzzle.input(part)
+
+    val duration = measureTimeMillis {
+        val result = puzzle.execute(part, input)
+        println("Result part $part: $result")
     }
-    println("Duration part 2: $durationPart2 ms")
+    println("Duration part $part: $duration ms")
 }
