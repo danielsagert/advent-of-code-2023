@@ -4,7 +4,7 @@ const val TEST_MODE = false
 
 fun main() {
     println("Test mode: $TEST_MODE")
-    val puzzle = Day01()
+    val puzzle = Day02()
     execute(puzzle, 1)
     println("-----")
     execute(puzzle, 2)
